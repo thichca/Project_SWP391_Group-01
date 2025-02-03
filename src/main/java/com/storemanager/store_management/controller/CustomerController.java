@@ -13,16 +13,21 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping
+   @GetMapping
     public String listCustomers(Model model) {
-        model.addAttribute("customers", customerService.getAllCustomers());
-        return "/list";
+       model.addAttribute("customers", customerService.getAllCustomers());
+       return "/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping ("/add")
     public String addCustomerForm(Model model) {
         model.addAttribute("customer", new Customer());
-        return "/add";
+        return "add";
+    }
+    @PostMapping("/add")
+   public String saveCustomer(@ModelAttribute Customer customer) {
+        customerService.saveCustomer(customer);
+        return "redirect:/customers"; // Quay lại danh sách sau khi thêm
     }
 
     @PostMapping("/update")
