@@ -2,10 +2,13 @@ package com.storemanager.store_management.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -17,10 +20,6 @@ public class DebtRecord {
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @Column(nullable = false)
     private String type; // GHI_NO or TRA_NO
