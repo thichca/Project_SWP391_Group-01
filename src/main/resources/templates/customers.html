@@ -9,7 +9,7 @@
 
     <!-- =============================================== -->
 
-    <!-- Left rside column. contains the sideba -->
+    <!-- Left rside column. contains the sidebar -->
     <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
 
     <!-- =============================================== -->
@@ -18,12 +18,11 @@
     <div class="content-wrapper">
         <!-- Thanh tìm kiếm -->
         <div class="search-container">
-            <form th:action="@{/customers/search}" method="get">
+            <form th:action="@{/customers}" method="get">
                 <input type="text" name="keyword" placeholder="Nhập tên hoặc số điện thoại..." th:value="${keyword}">
                 <button type="submit">🔍 Tìm kiếm</button>
             </form>
         </div>
-
 
         <div class="container">
             <h2>Danh sách khách hàng</h2>
@@ -73,11 +72,11 @@
                 </thead>
                 <tbody>
                 <tr th:each="customer : ${customers}">
-                    <td th:text="${customer?.id}"></td>
-                    <td th:text="${customer?.name}"></td>
-                    <td th:text="${customer?.phone}"></td>
-                    <td th:text="${customer?.address}"></td>
-                    <td th:text="${customer?.debtBalance}"></td>
+                    <td th:text="${customer.id}"></td>
+                    <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.phone}"></td>
+                    <td th:text="${customer.address}"></td>
+                    <td th:text="${customer.debtBalance}"></td>
                     <td class="action-links">
                         <button class="edit"
                                 th:attr="onclick=|toggleFormEdit('${customer.id}', '${customer.name}', '${customer.phone}', '${customer.address}', '${customer.debtBalance}')|">
@@ -85,33 +84,23 @@
                         </button>
                         <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="delete"
                            onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này?')">Xóa</a>
-
                     </td>
                 </tr>
                 </tbody>
             </table>
 
-            <!-- Form chỉnh sửa khách hàng (Ẩn ban đầu) -->
-            <div id="editCustomerForm" style="display: none;">
-                <h3>Sửa khách hàng</h3>
-                <form th:action="@{/customers/edit}" method="post">
-                    <input type="hidden" id="editId" name="id">
-
-                    <label for="editName">Tên khách hàng:</label>
-                    <input type="text" id="editName" name="name" required>
-
-                    <label for="editPhone">Số điện thoại:</label>
-                    <input type="text" id="editPhone" name="phone" required>
-
-                    <label for="editAddress">Địa chỉ:</label>
-                    <input type="text" id="editAddress" name="address" required>
-
-                    <label for="editDebtBalance">Công nợ:</label>
-                    <input type="number" id="editDebtBalance" name="debtBalance" step="0.01" required>
-
-                    <button type="submit" class="btn">Lưu thay đổi</button>
-                    <button type="button" class="btn cancel" onclick="closeEditForm()">Hủy</button>
-                </form>
+            <!-- Phân trang -->
+            <div class="pagination">
+                <span th:if="${currentPage > 0}">
+                    <a th:href="@{/customers(page=${currentPage - 1}, size=${size}, keyword=${keyword})}">« Trang trước</a>
+                </span>
+                <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a th:href="@{/customers(page=${i}, size=${size}, keyword=${keyword})}"
+                       th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active' : ''"></a>
+                </span>
+                <span th:if="${currentPage < totalPages - 1}">
+                    <a th:href="@{/customers(page=${currentPage + 1}, size=${size}, keyword=${keyword})}">Trang sau »</a>
+                </span>
             </div>
 
         </div>

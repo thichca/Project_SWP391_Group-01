@@ -7,6 +7,9 @@ import com.storemanager.store_management.service.DebtRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,13 +24,23 @@ public class DebtController {
     @Autowired
     private CustomerService customerService;
 
-
     private static final double CREDIT_LIMIT = 10000.00;
 
     @GetMapping
-    public String listDebts(Model model) {
+    public String listDebts(@RequestParam(value = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "size", defaultValue = "10") int size,
+                            Model model) {
+        // Tạo Pageable với trang và kích thước
+        Pageable pageable = PageRequest.of(page, size);
+
+        // Lấy tất cả khách hàng phân trang
+        Page<Customer> customersPage = customerService.getAllCustomers(pageable);
+        model.addAttribute("customers", customersPage.getContent()); // Lấy dữ liệu khách hàng của trang hiện tại
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", customersPage.getTotalPages());
+        model.addAttribute("size", size);
+
         model.addAttribute("debtRecords", debtRecordService.getAllDebtRecords());
-        model.addAttribute("customers", customerService.getAllCustomers());
         model.addAttribute("debtRecord", new DebtRecord());
         return "debts";
     }
