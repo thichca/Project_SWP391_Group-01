@@ -1,0 +1,217 @@
+/* ============================
+   1. Breadcrumb
+   ============================ */
+.box-tools .breadcrumb {
+    margin-bottom: 0;
+    padding: 5px;
+    background: none;
+}
+
+.box-tools .breadcrumb li {
+    margin-right: 15px;
+    float: left;
+}
+
+.box-tools .breadcrumb li a {
+    color: #333;
+}
+
+.content-header > .breadcrumb {
+    padding: 0 7px;
+}
+
+/* ============================
+   2. Tùy chỉnh Nội dung Chính
+   ============================ */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ============================
+   3. Tìm kiếm
+   ============================ */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-container button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background: #0056b3;
+}
+
+/* ============================
+   4. Bảng danh sách khách hàng
+   ============================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #f4f4f4;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.action-links {
+    display: flex;
+    gap: 10px;
+}
+
+.action-links button,
+.action-links a {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.edit {
+    background: #ffc107;
+    color: #fff;
+}
+
+.delete {
+    background: #dc3545;
+    color: #fff;
+}
+
+.edit:hover {
+    background: #e0a800;
+}
+
+.delete:hover {
+    background: #c82333;
+}
+
+/* ============================
+   5. Form Thêm & Sửa khách hàng
+   ============================ */
+#addCustomerForm, #editCustomerForm {
+    background: #f8f9fa;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    background: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #218838;
+}
+
+.btn.cancel {
+    background: #6c757d;
+}
+
+.btn.cancel:hover {
+    background: #5a6268;
+}
+
+/* ============================
+   6. Nút Thêm khách hàng
+   ============================ */
+.add-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    background: #17a2b8;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background: #138496;
+}
+
+/* ============================
+   7. Responsive
+   ============================ */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-container input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .action-links {
+        flex-direction: column;
+    }
+}
