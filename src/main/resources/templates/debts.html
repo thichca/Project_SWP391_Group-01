@@ -1,92 +1,112 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Quản lý Công Nợ</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<head th:replace="admin/fragments/head :: head">
+
 </head>
-<body>
-<div class="container mt-4">
-    <h2 class="text-center">Quản lý Công Nợ</h2>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-    <!-- Thông báo lỗi nếu vượt hạn mức -->
-    <div th:if="${error}" class="alert alert-danger text-center">
-        <p th:text="${error}"></p>
-    </div>
+    <header th:replace="admin/fragments/header :: header"></header>
 
-    <!-- Thông báo thành công -->
-    <div th:if="${message}" class="alert alert-success text-center">
-        <p th:text="${message}"></p>
-    </div>
+    <!-- =============================================== -->
 
-    <!-- Form thêm công nợ -->
-    <div class="card mb-4">
-        <div class="card-header">Ghi Nhận Công Nợ</div>
-        <div class="card-body">
-            <form th:action="@{/debts/add}" th:object="${debtRecord}" method="post">
-                <div class="mb-3">
-                    <label for="customer" class="form-label">Khách hàng:</label>
-                    <select id="customer" class="form-select" th:field="*{customer.id}" required>
-                        <option th:each="customer : ${customers}"
-                                th:value="${customer.id}"
-                                th:text="${customer.name}">
-                        </option>
-                    </select>
+    <!-- Left rside column. contains the sideba -->
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="container mt-4">
+            <h2 class="text-center">Quản lý Công Nợ</h2>
+
+            <!-- Thông báo lỗi nếu vượt hạn mức -->
+            <div th:if="${error}" class="alert alert-danger text-center">
+                <p th:text="${error}"></p>
+            </div>
+
+            <!-- Thông báo thành công -->
+            <div th:if="${message}" class="alert alert-success text-center">
+                <p th:text="${message}"></p>
+            </div>
+
+            <!-- Form thêm công nợ -->
+            <div class="card mb-4">
+                <div class="card-header">Ghi Nhận Công Nợ</div>
+                <div class="card-body">
+                    <form th:action="@{/debts/add}" th:object="${debtRecord}" method="post">
+                        <div class="mb-3">
+                            <label for="customer" class="form-label">Khách hàng:</label>
+                            <select id="customer" class="form-select" th:field="*{customer.id}" required>
+                                <option th:each="customer : ${customers}"
+                                        th:value="${customer.id}"
+                                        th:text="${customer.name}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Loại giao dịch:</label>
+                            <select id="type" class="form-select" th:field="*{type}" required>
+                                <option value="GHI_NO">Ghi Nợ</option>
+                                <option value="TRA_NO">Trả Nợ</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Số tiền:</label>
+                            <input type="number" id="amount" class="form-control" th:field="*{amount}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="note" class="form-label">Ghi chú:</label>
+                            <input type="text" id="note" class="form-control" th:field="*{note}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Ghi nhận</button>
+                    </form>
                 </div>
+            </div>
 
-                <div class="mb-3">
-                    <label for="type" class="form-label">Loại giao dịch:</label>
-                    <select id="type" class="form-select" th:field="*{type}" required>
-                        <option value="GHI_NO">Ghi Nợ</option>
-                        <option value="TRA_NO">Trả Nợ</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Số tiền:</label>
-                    <input type="number" id="amount" class="form-control" th:field="*{amount}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="note" class="form-label">Ghi chú:</label>
-                    <input type="text" id="note" class="form-control" th:field="*{note}">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Ghi nhận</button>
-            </form>
+            <!-- Bảng danh sách công nợ -->
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>Khách hàng</th>
+                    <th>Loại</th>
+                    <th>Số tiền</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày tạo</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="debt : ${debtRecords}"
+                    th:classappend="${debt.customer.debtBalance > 10000} ? 'table-danger' : ''">
+                    <td th:text="${debt.customer.name}"></td>
+                    <td th:text="${debt.type}"></td>
+                    <td th:text="${debt.amount}"></td>
+                    <td th:text="${debt.note}"></td>
+                    <td th:text="${#temporals.format(debt.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
+                        <a th:href="@{/debts/delete/{id}(id=${debt.id})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa công nợ này?');">Xóa</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+    <!-- /.content-wrapper -->
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
 
-    <!-- Bảng danh sách công nợ -->
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th>Khách hàng</th>
-            <th>Loại</th>
-            <th>Số tiền</th>
-            <th>Ghi chú</th>
-            <th>Ngày tạo</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="debt : ${debtRecords}"
-            th:classappend="${debt.customer.debtBalance > 10000} ? 'table-danger' : ''">
-            <td th:text="${debt.customer.name}"></td>
-            <td th:text="${debt.type}"></td>
-            <td th:text="${debt.amount}"></td>
-            <td th:text="${debt.note}"></td>
-            <td th:text="${#temporals.format(debt.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
-            <td>
-                <a th:href="@{/debts/delete/{id}(id=${debt.id})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('Bạn có chắc chắn muốn xóa công nợ này?');">Xóa</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>
+<!-- ./wrapper -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script :: script"></div>
+
 </body>
 </html>
