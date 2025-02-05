@@ -1,0 +1,125 @@
+/* ============================
+   1. Tùy chỉnh Breadcrumb
+   ============================ */
+.box-tools .breadcrumb {
+    margin-bottom: 0;
+    padding: 5px;
+    background: none;
+}
+
+.box-tools .breadcrumb li {
+    margin-right: 15px;
+    float: left;
+}
+
+.box-tools .breadcrumb li a {
+    color: #333;
+}
+
+.content-header > .breadcrumb {
+    padding: 0 7px;
+}
+
+/* ============================
+   2. Tùy chỉnh Nội dung Chính
+   ============================ */
+.content .panel-body {
+    padding: 5px;
+}
+
+/* ============================
+   3. Tùy chỉnh Form
+   ============================ */
+.table-form .form-inline .input-group > .form-control {
+    width: 300px;
+}
+
+/* ============================
+   4. Tùy chỉnh Pagination
+   ============================ */
+.panel-pagination .panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* ============================
+   5. Danh mục Bài viết
+   ============================ */
+.post-category {
+    padding-left: 0;
+}
+
+.post-category ul {
+    padding-left: 15px;
+}
+
+/* ============================
+   6. Nút Social
+   ============================ */
+.btn-social {
+    padding-left: 32px;
+}
+
+.btn-social > :first-child {
+    width: 32px;
+    line-height: 32px;
+    font-size: 16px;
+}
+
+/* ============================
+   7. Hành động trong bảng
+   ============================ */
+.table-action a.label {
+    margin-left: 5px;
+}
+
+/* ============================
+   8. Bộ lọc báo cáo (Mới thêm)
+   ============================ */
+/* Đảm bảo content-header chứa cả h1 và bộ lọc cùng hàng */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Đẩy h1 sang trái, bộ lọc sang phải */
+    align-items: center;
+    flex-wrap: wrap; /* Đảm bảo không bị vỡ layout trên màn hình nhỏ */
+    gap: 15px;
+}
+
+/* Căn chỉnh bộ lọc ngày tháng */
+.report-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Giữ label và input trên cùng một hàng */
+.date-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Giảm kích thước của input */
+.date-group input {
+    width: 150px;
+}
+
+/* Căn chỉnh label để không bị đẩy xuống dòng */
+.date-group label {
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+/* Responsive: Khi màn hình nhỏ, tự động xuống dòng */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .report-filter {
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
