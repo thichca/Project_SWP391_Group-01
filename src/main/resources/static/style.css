@@ -1,0 +1,248 @@
+/* Tổng thể */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header của bảng */
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Hàng của bảng */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Màu nền xen kẽ */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Nút chỉnh sửa và xóa */
+.action-links a {
+    padding: 6px 12px;
+    margin: 2px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.action-links .edit {
+    background-color: #FFA500;
+}
+
+.action-links .delete {
+    background-color: #FF0000;
+}
+
+.action-links a:hover {
+    opacity: 0.8;
+}
+/* Form thêm khách hàng */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Nút hủy */
+.cancel {
+    background-color: #dc3545;
+}
+
+.cancel:hover {
+    background-color: #c82333;
+}
+.btn-add {
+    display: inline-block;
+    background-color: #ff4d4d; /* Màu đỏ cam */
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 5px 15px rgba(255, 77, 77, 0.4);
+}
+
+.btn-add:hover {
+    background-color: #cc0000; /* Màu đỏ đậm */
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 20px rgba(255, 77, 77, 0.6);
+}
+#addCustomerForm {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+#addCustomerForm h3 {
+    margin-top: 0;
+}
+
+#addCustomerForm input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    background: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #218838;
+}
+
+.btn.cancel {
+    background: #dc3545;
+}
+
+.btn.cancel:hover {
+    background: #c82333;
+}
+#editCustomerForm {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+#editCustomerForm h3 {
+    margin-top: 0;
+}
+
+#editCustomerForm input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.edit {
+    background: #ffc107;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.edit:hover {
+    background: #e0a800;
+}
+.search-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-container input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-container button {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-container button:hover {
+    background: #0056b3;
+}
+
