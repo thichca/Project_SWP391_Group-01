@@ -1,0 +1,112 @@
+<aside class="main-sidebar" th:fragment="sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img th:src="@{/assets/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>Alexander Pierce</p>
+                <p>Role</p>
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+
+        <ul class="sidebar-menu" data-widget="tree">
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-users"></i> <span>Trang chủ</span>
+                </a>
+            </li>
+
+            <li>
+                <a th:href="@{/customers}">
+                    <i class="fa fa-users"></i> <span>Khách hàng</span>
+                </a>
+            </li>
+
+            <li>
+                <a th:href="@{/debts}">
+                    <i class="fa fa-money"></i> <span>Công nợ</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-cubes"></i> <span>Sản phẩm</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-map-marker"></i> <span>Khu vực</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-file-text"></i> <span>Hóa đơn</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-bar-chart"></i> <span>Hiệu suất bán hàng</span>
+                </a>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-cogs"></i> <span>Quản lý hệ thống</span>
+                    <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href=""><i class="fa fa-database"></i> Cơ sở dữ liệu</a></li>
+                    <li><a href=""><i class="fa fa-shield"></i> Cài đặt bảo mật</a></li>
+                    <li><a href=""><i class="fa fa-tags"></i> Quản lý vai trò</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-cloud"></i> <span>Cloud</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-refresh"></i> <span>Sao lưu và khôi phục</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-headphones"></i> <span>Hỗ trợ kỹ thuật</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-book"></i> <span>Hướng dẫn sử dụng</span>
+                </a>
+            </li>
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

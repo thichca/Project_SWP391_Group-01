@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header th:replace="admin/fragments/header :: header"></header>
+
+    <!-- =============================================== -->
+
+    <!-- Left rside column. contains the sideba -->
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="header-container">
+                <!-- Tiêu đề -->
+                <h3 class="report-title">Trang chủ <small>Báo cáo hàng tháng</small></h3>
+
+                <!-- Bộ lọc thời gian -->
+                <div class="report-filter">
+                    <div class="date-group">
+                        <label for="startDate" class="form-label">Từ ngày:</label>
+                        <input type="date" id="startDate" class="form-control"
+                               th:value="${#temporals.format(#temporals.createNow().minusDays(29), 'yyyy-MM-dd')}">
+                    </div>
+                    <div class="date-group">
+                        <label for="endDate" class="form-label">Đến ngày:</label>
+                        <input type="date" id="endDate" class="form-control"
+                               th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateReport()">Lọc</button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>150</h3>
+
+                            <p>Đơn hàng</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>150</h3>
+
+                            <p>Đơn hàng chưa hoàn thành</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-hourglass-half"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>150</h3>
+
+                            <p>Khách hàng</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>150</h3>
+
+                            <p>Khách hàng mới</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">Xem chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="text-center">
+                                        <strong>
+                                            <span id="reportStartDate"
+                                                  th:text="${#temporals.format(#temporals.createNow().minusDays(29), 'dd/MM/yyyy')}"></span>
+                                            -
+                                            <span id="reportEndDate"
+                                                  th:text="${#temporals.format(#temporals.createNow(), 'dd/MM/yyyy')}"></span>
+                                        </strong>
+                                    </p>
+
+
+                                    <div class="chart">
+                                        <!-- Sales Chart Canvas -->
+                                        <canvas id="salesChart" style="height: 206px; width: 637px;" height="206"
+                                                width="637"></canvas>
+                                    </div>
+                                    <!-- /.chart-responsive -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-4">
+                                    <p class="text-center">
+                                        <strong>Mục tiêu</strong>
+                                    </p>
+
+                                    <div class="progress-group">
+                                        <span class="progress-text">Đơn hàng</span>
+                                        <span class="progress-number"><b>160</b>/200</span>
+
+                                        <div class="progress sm">
+                                            <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                        <span class="progress-text">Đơn hàng hoàn thành</span>
+                                        <span class="progress-number"><b>310</b>/400</span>
+
+                                        <div class="progress sm">
+                                            <div class="progress-bar progress-bar-red" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                        <span class="progress-text">Khách hàng</span>
+                                        <span class="progress-number"><b>480</b>/800</span>
+
+                                        <div class="progress sm">
+                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                    <div class="progress-group">
+                                        <span class="progress-text">Khách hng mới</span>
+                                        <span class="progress-number"><b>250</b>/500</span>
+
+                                        <div class="progress sm">
+                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /.progress-group -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- ./box-body -->
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="description-block border-right">
+                                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
+                                        <h5 class="description-header">$35,210.43</h5>
+                                        <span class="description-text">Doanh thu</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="description-block border-right">
+                                        <span class="description-percentage text-yellow"><i
+                                                class="fa fa-caret-left"></i> 0%</span>
+                                        <h5 class="description-header">$10,390.90</h5>
+                                        <span class="description-text">Chi phí</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="description-block border-right">
+                                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
+                                        <h5 class="description-header">$24,813.53</h5>
+                                        <span class="description-text">Lợi nhuận</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="description-block">
+                                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
+                                        <h5 class="description-header">1200</h5>
+                                        <span class="description-text">Mục tiêu hoàn thành</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-8">
+                    <!-- TABLE: LATEST ORDERS -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Đơn hàng gần đây</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                                        <td>Call of Duty IV</td>
+                                        <td><span class="label label-success">Shipped</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Tạo đơn hàng
+                                mới</a>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Tất cả đơn
+                                hàng</a>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+
+                <div class="col-md-4">
+                    <!-- PRODUCT LIST -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Sản phẩm đã thêm gần đây</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <ul class="products-list product-list-in-box">
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="dist/img/default-50x50.gif" alt="Product Image">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="javascript:void(0)" class="product-title">PlayStation 4
+                                            <span class="label label-success pull-right">$399</span></a>
+                                        <span class="product-description">
+                          PlayStation 4 500GB Console (PS4)
+                        </span>
+                                    </div>
+                                </li>
+                                <!-- /.item -->
+                            </ul>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="javascript:void(0)" class="uppercase">Tất cả sản phẩm</a>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script :: script"></div>
+</body>
+</html>

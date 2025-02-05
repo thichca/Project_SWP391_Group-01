@@ -1,131 +1,128 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Danh sách khách hàng</title>
-  <link rel="stylesheet" th:href="@{/style.css}">
-  <script>
-    function toggleFormAdd() {
-      var form = document.getElementById("addCustomerForm");
-      form.style.display = (form.style.display === "none") ? "block" : "none";
-    }
+<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-    function toggleFormEdit(id, name, phone, address, debtBalance) {
-      var form = document.getElementById("editCustomerForm");
-      form.style.display = "block";
+    <header th:replace="admin/fragments/header :: header"></header>
 
-      document.getElementById("editId").value = id;
-      document.getElementById("editName").value = name;
-      document.getElementById("editPhone").value = phone;
-      document.getElementById("editAddress").value = address;
-      document.getElementById("editDebtBalance").value = debtBalance;
-    }
+    <!-- =============================================== -->
 
-    function closeEditForm() {
-      document.getElementById("editCustomerForm").style.display = "none";
-    }
-  </script>
-</head>
-<body>
-<!-- Thanh tìm kiếm -->
-<div class="search-container">
-  <form th:action="@{/customers/search}" method="get">
-    <input type="text" name="keyword" placeholder="Nhập tên hoặc số điện thoại..." th:value="${keyword}">
-    <button type="submit">🔍 Tìm kiếm</button>
-  </form>
-</div>
+    <!-- Left rside column. contains the sideba -->
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Thanh tìm kiếm -->
+        <div class="search-container">
+            <form th:action="@{/customers/search}" method="get">
+                <input type="text" name="keyword" placeholder="Nhập tên hoặc số điện thoại..." th:value="${keyword}">
+                <button type="submit">🔍 Tìm kiếm</button>
+            </form>
+        </div>
 
 
-<div class="container">
-  <h2>Danh sách khách hàng</h2>
+        <div class="container">
+            <h2>Danh sách khách hàng</h2>
 
-  <!-- Hiển thị thông báo nếu có -->
-  <div th:if="${message}" class="alert">
-    <p th:text="${message}"></p>
-  </div>
+            <!-- Hiển thị thông báo nếu có -->
+            <div th:if="${message}" class="alert">
+                <p th:text="${message}"></p>
+            </div>
 
-  <!-- Nút mở form thêm khách hàng -->
-  <div class="add-button">
-    <button class="btn-add" onclick="toggleFormAdd()">➕ Thêm khách hàng</button>
-  </div>
+            <!-- Nút mở form thêm khách hàng -->
+            <div class="add-button">
+                <button class="btn-add" onclick="toggleFormAdd()">➕ Thêm khách hàng</button>
+            </div>
 
-  <!-- Form thêm khách hàng (Ẩn ban đầu) -->
-  <div id="addCustomerForm" style="display: none;">
-    <h3>Thêm khách hàng mới</h3>
-    <form th:action="@{/customers/add}" th:object="${customer}" method="post">
-      <label for="name">Tên khách hàng:</label>
-      <input type="text" id="name" th:field="*{name}" required>
+            <!-- Form thêm khách hàng (Ẩn ban đầu) -->
+            <div id="addCustomerForm" style="display: none;">
+                <h3>Thêm khách hàng mới</h3>
+                <form th:action="@{/customers/add}" th:object="${customer}" method="post">
+                    <label for="name">Tên khách hàng:</label>
+                    <input type="text" id="name" th:field="*{name}" required>
 
-      <label for="phone">Số điện thoại:</label>
-      <input type="text" id="phone" th:field="*{phone}" required>
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone" th:field="*{phone}" required>
 
-      <label for="address">Địa chỉ:</label>
-      <input type="text" id="address" th:field="*{address}" required>
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" id="address" th:field="*{address}" required>
 
-      <label for="debtBalance">Công nợ:</label>
-      <input type="number" id="debtBalance" th:field="*{debtBalance}" step="0.01" required>
+                    <label for="debtBalance">Công nợ:</label>
+                    <input type="number" id="debtBalance" th:field="*{debtBalance}" step="0.01" required>
 
-      <button type="submit" class="btn">Thêm khách hàng</button>
-      <button type="button" class="btn cancel" onclick="toggleFormAdd()">Hủy</button>
-    </form>
-  </div>
+                    <button type="submit" class="btn">Thêm khách hàng</button>
+                    <button type="button" class="btn cancel" onclick="toggleFormAdd()">Hủy</button>
+                </form>
+            </div>
 
-  <!-- Bảng danh sách khách hàng -->
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Tên khách hàng</th>
-      <th>Số điện thoại</th>
-      <th>Địa chỉ</th>
-      <th>Công nợ</th>
-      <th>Hành động</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="customer : ${customers}">
-      <td th:text="${customer?.id}"></td>
-      <td th:text="${customer?.name}"></td>
-      <td th:text="${customer?.phone}"></td>
-      <td th:text="${customer?.address}"></td>
-      <td th:text="${customer?.debtBalance}"></td>
-      <td class="action-links">
-        <button class="edit"
-                th:attr="onclick=|toggleFormEdit('${customer.id}', '${customer.name}', '${customer.phone}', '${customer.address}', '${customer.debtBalance}')|">
-          Sửa
-        </button>
-        <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="delete"
-           onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này?')">Xóa</a>
+            <!-- Bảng danh sách khách hàng -->
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Công nợ</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer?.id}"></td>
+                    <td th:text="${customer?.name}"></td>
+                    <td th:text="${customer?.phone}"></td>
+                    <td th:text="${customer?.address}"></td>
+                    <td th:text="${customer?.debtBalance}"></td>
+                    <td class="action-links">
+                        <button class="edit"
+                                th:attr="onclick=|toggleFormEdit('${customer.id}', '${customer.name}', '${customer.phone}', '${customer.address}', '${customer.debtBalance}')|">
+                            Sửa
+                        </button>
+                        <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="delete"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này?')">Xóa</a>
 
-      </td>
-    </tr>
-    </tbody>
-  </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-  <!-- Form chỉnh sửa khách hàng (Ẩn ban đầu) -->
-  <div id="editCustomerForm" style="display: none;">
-    <h3>Sửa khách hàng</h3>
-    <form th:action="@{/customers/edit}" method="post">
-      <input type="hidden" id="editId" name="id">
+            <!-- Form chỉnh sửa khách hàng (Ẩn ban đầu) -->
+            <div id="editCustomerForm" style="display: none;">
+                <h3>Sửa khách hàng</h3>
+                <form th:action="@{/customers/edit}" method="post">
+                    <input type="hidden" id="editId" name="id">
 
-      <label for="editName">Tên khách hàng:</label>
-      <input type="text" id="editName" name="name" required>
+                    <label for="editName">Tên khách hàng:</label>
+                    <input type="text" id="editName" name="name" required>
 
-      <label for="editPhone">Số điện thoại:</label>
-      <input type="text" id="editPhone" name="phone" required>
+                    <label for="editPhone">Số điện thoại:</label>
+                    <input type="text" id="editPhone" name="phone" required>
 
-      <label for="editAddress">Địa chỉ:</label>
-      <input type="text" id="editAddress" name="address" required>
+                    <label for="editAddress">Địa chỉ:</label>
+                    <input type="text" id="editAddress" name="address" required>
 
-      <label for="editDebtBalance">Công nợ:</label>
-      <input type="number" id="editDebtBalance" name="debtBalance" step="0.01" required>
+                    <label for="editDebtBalance">Công nợ:</label>
+                    <input type="number" id="editDebtBalance" name="debtBalance" step="0.01" required>
 
-      <button type="submit" class="btn">Lưu thay đổi</button>
-      <button type="button" class="btn cancel" onclick="closeEditForm()">Hủy</button>
-    </form>
-  </div>
+                    <button type="submit" class="btn">Lưu thay đổi</button>
+                    <button type="button" class="btn cancel" onclick="closeEditForm()">Hủy</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
 
 </div>
+<!-- ./wrapper -->
 
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script :: script"></div>
 </body>
 </html>
