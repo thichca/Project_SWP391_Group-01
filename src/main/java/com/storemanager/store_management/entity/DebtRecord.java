@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Entity
 @Data
+@Table(name = "debt_records")
 public class DebtRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
