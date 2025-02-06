@@ -215,3 +215,67 @@ form input {
         flex-direction: column;
     }
 }
+/* ============================
+   8. Phân trang
+   ============================ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination .prev, .pagination .next {
+    padding: 8px 12px;
+    background-color: #f1f1f1;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .prev:hover, .pagination .next:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Khi không thể click (disabled) */
+.pagination .disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+}
+
+/* Điều chỉnh phân trang cho các màn hình nhỏ */
+@media (max-width: 768px) {
+    .pagination a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}

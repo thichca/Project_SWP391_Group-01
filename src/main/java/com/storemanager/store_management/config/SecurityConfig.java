@@ -27,7 +27,7 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/login", "/register").permitAll()  // Cho phép truy cập trang login và register
                                 .requestMatchers("/admin/**").hasRole("admin") // Chỉ admin có quyền truy cập các trang admin
-                                .requestMatchers("/**").hasRole("employee") // Chỉ user có quyền truy cập các trang user
+                                .requestMatchers("/admin").hasRole("employee") // Chỉ user có quyền truy cập các trang user
                                 .requestMatchers("/owner/**").hasRole("owner") // Chỉ user có quyền truy cập các trang user
                                 .anyRequest().authenticated() // Các trang khác yêu cầu đăng nhập
                 )
