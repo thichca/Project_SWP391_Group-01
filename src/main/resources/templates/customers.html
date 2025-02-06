@@ -102,6 +102,27 @@
                     <a th:href="@{/customers(page=${currentPage + 1}, size=${size}, keyword=${keyword})}">Trang sau »</a>
                 </span>
             </div>
+            <div id="editCustomerForm" style="display: none;">
+                <h3>Sửa khách hàng</h3>
+                <form th:action="@{/customers/edit}" method="post">
+                    <input type="hidden" id="editId" name="id">
+
+                    <label for="editName">Tên khách hàng:</label>
+                    <input type="text" id="editName" name="name" required>
+
+                    <label for="editPhone">Số điện thoại:</label>
+                    <input type="text" id="editPhone" name="phone" required>
+
+                    <label for="editAddress">Địa chỉ:</label>
+                    <input type="text" id="editAddress" name="address" required>
+
+                    <label for="editDebtBalance">Công nợ:</label>
+                    <input type="number" id="editDebtBalance" name="debtBalance" step="0.01" required>
+
+                    <button type="submit" class="btn">Lưu thay đổi</button>
+                    <button type="button" class="btn cancel" onclick="closeEditForm()">Hủy</button>
+                </form>
+            </div>
 
         </div>
     </div>
