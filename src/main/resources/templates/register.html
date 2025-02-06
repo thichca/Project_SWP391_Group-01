@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Đăng ký</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/assets/css/AdminLTE.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="#"><b>Quản Lý Kho Gạo</b></a>
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg"><b>Đăng ký</b></p>
+
+        <form th:action="@{/register}" method="post" th:object="${user}">
+            <div class="form-group has-feedback">
+                <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập" required
+                       th:field="*{username}">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="email" name="email" class="form-control" placeholder="Email" required th:field="*{email}">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required
+                       th:field="*{password}">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="confirm_password" class="form-control" placeholder="Nhập lại mật khẩu"
+                       required>
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" required> Tôi đồng ý với <a href="#">điều khoản</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng ký</button>
+                </div>
+            </div>
+        </form>
+
+        <a href="login.html" class="text-center">Đã có tài khoản</a>
+    </div>
+</div>
+</body>
+</html>

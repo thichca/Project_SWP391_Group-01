@@ -1,8 +1,6 @@
 package com.storemanager.store_management.controller;
 
 
-
-
 import com.storemanager.store_management.entity.Customer;
 import com.storemanager.store_management.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +40,7 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("message", "Xóa khách hàng thành công!");
         return "redirect:/customers";
     }
+
     @PostMapping("/edit")
     public String editCustomer(
             @RequestParam("id") Long id,
@@ -64,6 +63,7 @@ public class CustomerController {
         }
         return "redirect:/customers";
     }
+
     @GetMapping("/search")
     public String searchCustomers(@RequestParam("keyword") String keyword, Model model) {
         List<Customer> customers = customerService.searchCustomers(keyword);

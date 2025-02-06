@@ -1535,7 +1535,7 @@ a:focus {
 }
 
 .icheck > label {
-    padding-left: 0;
+    padding-left: 28px;
 }
 
 /* support Font Awesome icons in form-control */
@@ -5964,4 +5964,5 @@ table.text-center th {
     .table-responsive > .table tr td {
         white-space: normal !important;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.storemanager.store_management.controller.admin;
+package com.storemanager.store_management.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
