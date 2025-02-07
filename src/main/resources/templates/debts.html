@@ -74,6 +74,7 @@
                 <thead class="table-dark">
                 <tr>
                     <th>Khách hàng</th>
+                    <th>Số điện thoại</th>
                     <th>Loại</th>
                     <th>Số tiền</th>
                     <th>Ghi chú</th>
@@ -85,6 +86,7 @@
                 <tr th:each="debt : ${debtRecords}"
                     th:classappend="${debt.customer.debtBalance > 10000} ? 'table-danger' : ''">
                     <td th:text="${debt.customer.name}"></td>
+                    <td th:text="${debt.customer.phone}"></td>
                     <td th:text="${debt.type}"></td>
                     <td th:text="${debt.amount}"></td>
                     <td th:text="${debt.note}"></td>
