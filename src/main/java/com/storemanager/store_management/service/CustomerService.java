@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -18,9 +20,19 @@ public class CustomerService {
         return customerRepository.findAll(pageable);
     }
 
-    // Tìm kiếm khách hàng phân trang
+    // Tìm kiếm khách hàng theo tên hoặc số điện thoại
     public Page<Customer> searchCustomers(String keyword, Pageable pageable) {
         return customerRepository.findByNameContainingIgnoreCaseOrPhoneContaining(keyword, keyword, pageable);
+    }
+
+    // Lọc khách hàng theo địa chỉ
+    public Page<Customer> getCustomersByAddress(String address, Pageable pageable) {
+        return customerRepository.findByAddressContainingIgnoreCase(address, pageable);
+    }
+
+    // Lấy tất cả các địa chỉ duy nhất từ cơ sở dữ liệu
+    public List<String> getAllDistinctAddresses() {
+        return customerRepository.findDistinctAddresses();
     }
 
     public void saveCustomer(Customer customer) {

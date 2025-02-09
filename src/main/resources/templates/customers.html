@@ -23,6 +23,15 @@
                 <button type="submit">🔍 Tìm kiếm</button>
             </form>
         </div>
+        <div class="filter-container">
+            <form th:action="@{/customers}" method="get">
+                <select name="addressFilter">
+                    <option value="">Chọn địa chỉ</option>
+                    <option th:each="address : ${addressList}" th:value="${address}" th:text="${address}"></option>
+                </select>
+                <button type="submit">🔍 Lọc theo địa chỉ</button>
+            </form>
+        </div>
 
         <div class="container">
             <h2>Danh sách khách hàng</h2>
