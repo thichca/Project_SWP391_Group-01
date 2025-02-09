@@ -121,7 +121,9 @@
                 <a href="#" class="btn btn-default btn-flat">Hồ sơ</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Đăng xuất</a>
+                <form action="#" th:action="@{/logout}" method="POST">
+                  <input type="submit" class="btn btn-info" value="Đăng xuất"/>
+                </form>
               </div>
             </li>
           </ul>

@@ -21,7 +21,7 @@
     <div class="login-box-body">
         <p class="login-box-msg"><b>Đăng nhập</b></p>
 
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/loginUser}" method="post">
             <div class="form-group has-feedback">
                 <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -52,7 +52,7 @@
                 bằng Google</a>
         </div>
 
-        <a href="#">Quên mật khẩu</a><br>
+        <a th:href="@{/forget-password}">Quên mật khẩu</a><br>
         <a th:href="@{/register}" class="text-center">Đăng ký</a>
     </div>
 </div>
