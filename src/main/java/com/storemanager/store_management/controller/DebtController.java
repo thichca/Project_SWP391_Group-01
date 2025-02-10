@@ -2,9 +2,14 @@ package com.storemanager.store_management.controller;
 
 import com.storemanager.store_management.entity.Customer;
 import com.storemanager.store_management.entity.DebtRecord;
+import com.storemanager.store_management.entity.User;
 import com.storemanager.store_management.service.CustomerService;
 import com.storemanager.store_management.service.DebtRecordService;
+import com.storemanager.store_management.service.UserServiceIpml;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.data.domain.Page;
@@ -25,6 +30,18 @@ public class DebtController {
     private CustomerService customerService;
 
     private static final double CREDIT_LIMIT = 10000.00;
+    @Autowired
+    private UserServiceIpml userServiceIpml;
+
+    // Lấy thông tin người dùng hiện tại từ session
+    private User getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails) principal).getUsername();
+            return userServiceIpml.findByUsername(username);
+        }
+        return null;
+    }
 
     @GetMapping
     public String listDebts(@RequestParam(value = "page", defaultValue = "0") int page,
@@ -48,6 +65,19 @@ public class DebtController {
     @PostMapping("/add")
     public String addDebt(@ModelAttribute("debtRecord") DebtRecord debtRecord,
                           RedirectAttributes redirectAttributes) {
+        // Lấy thông tin User từ Security Context
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+            User user = userServiceIpml.findByUsername(username);
+                  //  .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Gán User cho DebtRecord
+            debtRecord.setUser(user);
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Không thể xác định người dùng!");
+            return "redirect:/debts";
+        }
         Customer customer = customerService.getCustomerById(debtRecord.getCustomer().getId());
         if (customer.getDebtBalance() + debtRecord.getAmount() > CREDIT_LIMIT) {
             redirectAttributes.addFlashAttribute("error", "Công nợ vượt hạn mức! Vui lòng kiểm tra lại.");

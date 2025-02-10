@@ -41,7 +41,7 @@
                             <select id="customer" class="form-select" th:field="*{customer.id}" required>
                                 <option th:each="customer : ${customers}"
                                         th:value="${customer.id}"
-                                        th:text="${customer.name}">
+                                        th:text="${customer.phone}">
                                 </option>
                             </select>
                         </div>
@@ -85,6 +85,7 @@
                 <tr th:each="debt : ${debtRecords}"
                     th:classappend="${debt.customer.debtBalance > 10000} ? 'table-danger' : ''">
                     <td th:text="${debt.customer.name}"></td>
+                    <td th:text ="${debt.customer.phone}"></td>
                     <td th:text="${debt.type}"></td>
                     <td th:text="${debt.amount}"></td>
                     <td th:text="${debt.note}"></td>
