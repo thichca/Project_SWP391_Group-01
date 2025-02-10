@@ -32,6 +32,7 @@
             http.authorizeHttpRequests(
                     configurer->configurer
                             .requestMatchers("/register/**").permitAll()
+                            .requestMatchers("/forget-password").permitAll()
                             .anyRequest().authenticated()
             ).formLogin(
                     form->form.loginPage("/login")
