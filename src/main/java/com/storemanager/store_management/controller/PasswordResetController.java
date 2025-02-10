@@ -23,18 +23,21 @@ public class PasswordResetController {
         return "forgetPassword";
     }
 
+
+
+
     @PostMapping("/forget-password")
-    public String processForgotPassword(@RequestParam("email") String id, Model model) {
-        if (id == null || id.trim().isEmpty()) {
+    public String processForgotPassword(@RequestParam("email") String email, Model model) {
+        if (email == null || email.trim().isEmpty()) {
             model.addAttribute("message", "Vui lòng nhập email hợp lệ.");
             return "forgetPassword";
         }
 
-        boolean exists = PasswordResetService.checkIdExists(id);
+        boolean exists = PasswordResetService.checkIdExists(email);
 
-        if (true) {
-            model.addAttribute("email", id);
-            return "resetPassword";
+        if (exists) {
+            model.addAttribute("email", email);
+            return  "resetPassword";
         } else {
             model.addAttribute("message", "Email không tồn tại trong hệ thống.");
             return "forgetPassword";
@@ -49,6 +52,7 @@ public class PasswordResetController {
 
         if (!newPassword.equals(confirmNewPassword)) {
             model.addAttribute("message", "Mật khẩu xác nhận không khớp.");
+            model.addAttribute("email", email);
             return "resetPassword";
         }
 
@@ -59,6 +63,7 @@ public class PasswordResetController {
             return "login";
         } else {
             model.addAttribute("message", "Có lỗi xảy ra, vui lòng thử lại.");
+            model.addAttribute("email", email);
             return "resetPassword";
         }
     }

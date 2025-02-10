@@ -35,6 +35,11 @@ public class UserServiceIpml implements UserService {
     }
 
     @Override
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user==null){

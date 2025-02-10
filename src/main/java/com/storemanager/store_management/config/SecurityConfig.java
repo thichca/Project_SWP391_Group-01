@@ -32,6 +32,9 @@
             http.authorizeHttpRequests(
                     configurer->configurer
                             .requestMatchers("/register/**").permitAll()
+                            .requestMatchers("/forget-password/**").permitAll()
+                            .requestMatchers("/reset-password/**").permitAll()
+
                             .anyRequest().authenticated()
             ).formLogin(
                     form->form.loginPage("/login")
@@ -41,7 +44,7 @@
             ).logout(
                     logout->logout.permitAll()
             ).exceptionHandling(
-                    configurer->configurer.accessDeniedPage("/showPage403")
+                    configurer->configurer.accessDeniedPage("/login")
             );
 
             return http.build();
