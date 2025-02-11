@@ -60,7 +60,7 @@
                     <input type="text" id="address" th:field="*{address}" required>
 
                     <label for="debtBalance">Công nợ:</label>
-                    <input type="number" id="debtBalance" th:field="*{debtBalance}" step="0.01" required>
+                    <input type="number" id="debtBalance" th:field="*{debtBalance}" step="0.01" required min="0">
 
                     <button type="submit" class="btn">Thêm khách hàng</button>
                     <button type="button" class="btn cancel" onclick="toggleFormAdd()">Hủy</button>

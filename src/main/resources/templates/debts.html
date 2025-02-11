@@ -41,7 +41,7 @@
                             <select id="customer" class="form-select" th:field="*{customer.id}" required>
                                 <option th:each="customer : ${customers}"
                                         th:value="${customer.id}"
-                                        th:text="${customer.name}">
+                                        th:text="${customer.phone}">
                                 </option>
                             </select>
                         </div>
@@ -74,29 +74,50 @@
                 <thead class="table-dark">
                 <tr>
                     <th>Khách hàng</th>
+                    <th>SĐT</th>
+                    <th>Địa Chỉ</th>
                     <th>Loại</th>
                     <th>Số tiền</th>
                     <th>Ghi chú</th>
                     <th>Ngày tạo</th>
-                    <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="debt : ${debtRecords}"
                     th:classappend="${debt.customer.debtBalance > 10000} ? 'table-danger' : ''">
                     <td th:text="${debt.customer.name}"></td>
+                    <td th:text="${debt.customer.phone}"></td>
+                    <td th:text="${debt.customer.address}"></td>
                     <td th:text="${debt.type}"></td>
                     <td th:text="${debt.amount}"></td>
                     <td th:text="${debt.note}"></td>
                     <td th:text="${#temporals.format(debt.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td>
-                        <a th:href="@{/debts/delete/{id}(id=${debt.id})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Bạn có chắc chắn muốn xóa công nợ này?');">Xóa</a>
-                    </td>
+
                 </tr>
                 </tbody>
             </table>
+            <!-- Phân trang danh sách khách hàng -->
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <ul class="pagination">
+                        <!-- Nút "Trước" -->
+                        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled' : ''">
+                            <a class="page-link" th:href="@{/debts(page=${currentPage - 1}, size=${size})}">Trước</a>
+                        </li>
+
+                        <!-- Số trang -->
+                        <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${currentPage == i} ? 'active' : ''">
+                            <a class="page-link" th:href="@{/debts(page=${i}, size=${size})}" th:text="${i + 1}"></a>
+                        </li>
+
+                        <!-- Nút "Sau" -->
+                        <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled' : ''">
+                            <a class="page-link" th:href="@{/debts(page=${currentPage + 1}, size=${size})}">Sau</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
     <!-- /.content-wrapper -->

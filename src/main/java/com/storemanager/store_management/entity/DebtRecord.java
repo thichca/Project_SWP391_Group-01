@@ -24,6 +24,9 @@ public class DebtRecord {
 
     @Column(nullable = false)
     private String type; // GHI_NO or TRA_NO
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;  // Liên kết với User
 
     @Column(nullable = false, columnDefinition = "DECIMAL(15,2)")
     private Double amount;
