@@ -103,47 +103,7 @@ tr:nth-child(even) {
 /* ============================
    5. Form Thêm & Sửa khách hàng
    ============================ */
-#addCustomerForm, #editCustomerForm {
-    background: #f8f9fa;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
-form label {
-    font-weight: bold;
-}
-
-form input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.btn {
-    background: #28a745;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: #218838;
-}
-
-.btn.cancel {
-    background: #6c757d;
-}
-
-.btn.cancel:hover {
-    background: #5a6268;
-}
 
 /* ============================
    6. Nút Thêm khách hàng
@@ -372,5 +332,83 @@ button:hover {
 .btn-add:hover {
     background-color: #218838;
 }
+/*!* Định dạng chung cho form *!*/
+/*#addCustomerForm, #editCustomerForm {*/
+/*    display: none;*/
+/*    width: 400px;*/
+/*    background: #fff;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    z-index: 1000;*/
+/*}*/
 
+/* Tiêu đề của form */
+#addCustomerForm h3, #editCustomerForm h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Định dạng nhãn */
+#addCustomerForm label, #editCustomerForm label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+/* Định dạng ô nhập liệu */
+#addCustomerForm input, #editCustomerForm input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Nút bấm */
+.btn {
+    display: inline-block;
+    width: 48%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Nút xác nhận */
+.btn {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Nút hủy */
+.btn.cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Định dạng overlay nền mờ khi form hiển thị */
+/*.form-overlay {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background: rgba(0, 0, 0, 0.5);*/
+/*    display: none;*/
+/*    z-index: 999;*/
+/*}*/
 
