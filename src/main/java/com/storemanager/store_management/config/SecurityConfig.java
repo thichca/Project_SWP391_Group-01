@@ -33,6 +33,7 @@
                     configurer->configurer
                             .requestMatchers("/register/**").permitAll()
                             .requestMatchers("/forget-password").permitAll()
+                            .requestMatchers("/reset-password/**").permitAll()
                             .anyRequest().authenticated()
             ).formLogin(
                     form->form.loginPage("/login")

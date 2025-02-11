@@ -32,16 +32,8 @@ public class DebtController {
     private static final double CREDIT_LIMIT = 10000.00;
     @Autowired
     private UserServiceIpml userServiceIpml;
+    private static final int PAGE_SIZE = 10;
 
-    // Lấy thông tin người dùng hiện tại từ session
-    private User getCurrentUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            String username = ((UserDetails) principal).getUsername();
-            return userServiceIpml.findByUsername(username);
-        }
-        return null;
-    }
 
     @GetMapping
     public String listDebts(@RequestParam(value = "page", defaultValue = "0") int page,
@@ -56,8 +48,7 @@ public class DebtController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", customersPage.getTotalPages());
         model.addAttribute("size", size);
-
-        model.addAttribute("debtRecords", debtRecordService.getAllDebtRecords());
+        model.addAttribute("debtRecords", debtRecordService.getAllDebtRecords(pageable));
         model.addAttribute("debtRecord", new DebtRecord());
         return "debts";
     }
@@ -70,7 +61,6 @@ public class DebtController {
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
             String username = ((UserDetails) authentication.getPrincipal()).getUsername();
             User user = userServiceIpml.findByUsername(username);
-                  //  .orElseThrow(() -> new RuntimeException("User not found"));
 
             // Gán User cho DebtRecord
             debtRecord.setUser(user);
@@ -87,14 +77,6 @@ public class DebtController {
         redirectAttributes.addFlashAttribute("message", "Ghi nhận công nợ thành công!");
         return "redirect:/debts";
     }
-
-    @GetMapping("/delete/{id}")
-    public String deleteDebt(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        debtRecordService.deleteDebtRecord(id);
-        redirectAttributes.addFlashAttribute("message", "Xóa công nợ thành công!");
-        return "redirect:/debts";
-    }
-
     @GetMapping("/customer/{customerId}")
     public String viewCustomerDebts(@PathVariable Long customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);

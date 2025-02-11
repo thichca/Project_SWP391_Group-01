@@ -28,7 +28,7 @@ public class PasswordResetService {
             User user = userOpt.get();
             user.setPassword(newPassword);
             user.setPassword(passwordEncoder.encode(newPassword));
-            passwordResetRepository.save(user);
+            passwordResetRepository.saveAndFlush(user);
             return true;
         }
 
