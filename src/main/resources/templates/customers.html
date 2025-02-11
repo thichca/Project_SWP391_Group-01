@@ -16,22 +16,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Thanh tìm kiếm -->
-        <div class="search-container">
-            <form th:action="@{/customers}" method="get">
-                <input type="text" name="keyword" placeholder="Nhập tên hoặc số điện thoại..." th:value="${keyword}">
-                <button type="submit">🔍 Tìm kiếm</button>
-            </form>
-        </div>
-        <div class="filter-container">
-            <form th:action="@{/customers}" method="get">
-                <select name="addressFilter">
-                    <option value="">Chọn địa chỉ</option>
-                    <option th:each="address : ${addressList}" th:value="${address}" th:text="${address}"></option>
-                </select>
-                <button type="submit">🔍 Lọc theo địa chỉ</button>
-            </form>
-        </div>
+
 
         <div class="container">
             <h2>Danh sách khách hàng</h2>
@@ -40,11 +25,33 @@
             <div th:if="${message}" class="alert">
                 <p th:text="${message}"></p>
             </div>
+            <div class="toolbar">
 
-            <!-- Nút mở form thêm khách hàng -->
-            <div class="add-button">
-                <button class="btn-add" onclick="toggleFormAdd()">➕ Thêm khách hàng</button>
+            <!-- Thanh tìm kiếm -->
+                <div class="search-container">
+                    <form th:action="@{/customers}" method="get">
+                        <input type="text" name="keyword" placeholder="Nhập tên hoặc số điện thoại..." th:value="${keyword}">
+                        <button type="submit">🔍Tìm kiếm</button>
+                    </form>
+                </div>
+                <div class="filter-container">
+                    <form th:action="@{/customers}" method="get">
+                        <select name="addressFilter">
+                            <option value="">Chọn địa chỉ</option>
+                            <option th:each="address : ${addressList}" th:value="${address}" th:text="${address}"></option>
+                        </select>
+                        <button type="submit">🔍Lọc</button>
+                    </form>
+                </div>
+                <!-- Nút mở form thêm khách hàng -->
+                <div class="add-button">
+                    <button class="btn-add" onclick="toggleFormAdd()">➕ Thêm khách hàng</button>
+                </div>
+
             </div>
+
+
+
 
             <!-- Form thêm khách hàng (Ẩn ban đầu) -->
             <div id="addCustomerForm" style="display: none;">
