@@ -55,13 +55,13 @@ public class User {
     private boolean active;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name="role_id")
-    )
-    private Collection<Role> roles;
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="users_roles",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name="role_id")
+//    )
+//    private Collection<Role> roles;
 
     public User() {
     }
@@ -167,11 +167,11 @@ public class User {
         this.active = active;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
+//    public Collection<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Collection<Role> roles) {
+//        this.roles = roles;
+//    }
 }

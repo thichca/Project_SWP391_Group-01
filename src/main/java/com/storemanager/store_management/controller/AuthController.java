@@ -59,7 +59,8 @@ public class AuthController {
         newUser.setUsername(username);
         newUser.setPassword(new BCryptPasswordEncoder().encode(password));  // Mã hóa mật khẩu
         newUser.setEmail(email);
-        newUser.setRole("employee");
+        newUser.setRole("ROLE_EMPLOYEE");
+        newUser.setActive(true);
 
         userRepository.save(newUser);
         return "redirect:/login";  // Chuyển hướng về trang login sau khi đăng ký thành công
