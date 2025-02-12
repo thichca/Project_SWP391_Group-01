@@ -49,6 +49,9 @@
 
             return http.build();
         }
-
+        @Bean
+        WebSecurityCustomizer webSecurityCustomizer() {
+            return (web -> web.ignoring().requestMatchers("/static/**", "assets/**"));
+        }
 
     }

@@ -4,11 +4,12 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img th:src="@{/assets/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
+                <img th:src="${user != null && user.avatar != null ? user.avatar : '/images/avatar.png'}"
+                     alt="User Avatar">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <p>Role</p>
+                <span th:text="${user != null ? user.username : 'Guest'}"></span>
+                <span th:text="${user.role}"></span>
             </div>
         </div>
         <!-- search form -->

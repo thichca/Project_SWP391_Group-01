@@ -22,6 +22,9 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     @Column(name = "role", nullable = false)
     private String role;
 
@@ -51,26 +54,15 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 
-    @Column(name = "active")
-    private boolean active;
-
-
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name="role_id")
-//    )
-//    private Collection<Role> roles;
-
     public User() {
     }
 
-    public User(long id, String username, String password, String email, String role, LocalDateTime createdAt, LocalDateTime updatedAt, String createdBy, String updatedBy, boolean isDelete) {
+    public User(long id, String username, String password, String email, String avatar, String role, LocalDateTime createdAt, LocalDateTime updatedAt, String createdBy, String updatedBy, boolean isDelete) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.avatar = avatar;
         this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -109,6 +101,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getRole() {
@@ -158,20 +158,4 @@ public class User {
     public void setDelete(boolean delete) {
         isDelete = delete;
     }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-//    public Collection<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Collection<Role> roles) {
-//        this.roles = roles;
-//    }
 }
