@@ -40,32 +40,6 @@ h2 {
 /* ============================
    3. Tìm kiếm
    ============================ */
-.search-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.search-container input {
-    width: 300px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.search-container button {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-container button:hover {
-    background: #0056b3;
-}
 
 /* ============================
    4. Bảng danh sách khách hàng
@@ -129,69 +103,29 @@ tr:nth-child(even) {
 /* ============================
    5. Form Thêm & Sửa khách hàng
    ============================ */
-#addCustomerForm, #editCustomerForm {
-    background: #f8f9fa;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
-form label {
-    font-weight: bold;
-}
-
-form input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.btn {
-    background: #28a745;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: #218838;
-}
-
-.btn.cancel {
-    background: #6c757d;
-}
-
-.btn.cancel:hover {
-    background: #5a6268;
-}
 
 /* ============================
    6. Nút Thêm khách hàng
    ============================ */
-.add-button {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
+/*.add-button {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
-.btn-add {
-    background: #17a2b8;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+/*.btn-add {*/
+/*    background: #17a2b8;*/
+/*    color: #fff;*/
+/*    padding: 10px 15px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
 
-.btn-add:hover {
-    background: #138496;
-}
+/*.btn-add:hover {*/
+/*    background: #138496;*/
+/*}*/
 
 /* ============================
    7. Responsive
@@ -279,3 +213,202 @@ form input {
         font-size: 12px;
     }
 }
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Hoặc space-around / space-evenly tùy thích */
+    gap: 15px; /* Khoảng cách giữa các phần tử */
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container form,
+.filter-container form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type="text"], select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.btn-add {
+    background-color: #28a745;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+.toolbar {
+    display: flex;
+    justify-content: center; /* Căn giữa các phần tử */
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa các phần tử */
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.toolbar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 45px; /* Đảm bảo chiều cao bằng nhau */
+}
+
+/* Làm rộng thanh chọn địa chỉ */
+select {
+    width: 300px; /* Tăng độ rộng */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 45px;
+}
+
+/* Thu nhỏ nút lọc */
+button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 45px; /* Đảm bảo chiều cao bằng nhau */
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Nút lọc nhỏ hơn */
+.filter-container button {
+    width: 120px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.btn-add {
+    background-color: #28a745;
+    padding: 10px 20px;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+/*!* Định dạng chung cho form *!*/
+/*#addCustomerForm, #editCustomerForm {*/
+/*    display: none;*/
+/*    width: 400px;*/
+/*    background: #fff;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    z-index: 1000;*/
+/*}*/
+
+/* Tiêu đề của form */
+#addCustomerForm h3, #editCustomerForm h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Định dạng nhãn */
+#addCustomerForm label, #editCustomerForm label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+/* Định dạng ô nhập liệu */
+#addCustomerForm input, #editCustomerForm input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Nút bấm */
+.btn {
+    display: inline-block;
+    width: 48%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Nút xác nhận */
+.btn {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Nút hủy */
+.btn.cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Định dạng overlay nền mờ khi form hiển thị */
+/*.form-overlay {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background: rgba(0, 0, 0, 0.5);*/
+/*    display: none;*/
+/*    z-index: 999;*/
+/*}*/
+

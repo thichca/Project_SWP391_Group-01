@@ -5,6 +5,8 @@ import com.storemanager.store_management.entity.DebtRecord;
 import com.storemanager.store_management.repository.CustomerRepository;
 import com.storemanager.store_management.repository.DebtRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +24,9 @@ public class DebtRecordService {
     private static final double CREDIT_LIMIT = 10000.00; // Hạn mức công nợ
 
     // Lấy tất cả các bản ghi công nợ
-    public List<DebtRecord> getAllDebtRecords() {
-        return debtRecordRepository.findAll();
+    public Page<DebtRecord> getAllDebtRecords(Pageable pageable) {
+
+        return debtRecordRepository.findAll(pageable);
     }
 
     // Lấy công nợ theo khách hàng
