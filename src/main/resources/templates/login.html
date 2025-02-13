@@ -20,8 +20,10 @@
 <!--    </div>-->
     <div class="login-box-body">
         <p class="login-box-msg"><b>Đăng nhập</b></p>
-
-        <form th:action="@{/loginUser}" method="post">
+        <div th:if="${error1}" class="alert alert-danger text-center">
+            <p th:text="${error1}"></p>
+        </div>
+        <form th:action="@{/login}" method="post">
             <div class="form-group has-feedback">
                 <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

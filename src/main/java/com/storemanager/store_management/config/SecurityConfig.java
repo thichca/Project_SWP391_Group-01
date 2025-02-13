@@ -38,10 +38,11 @@
                             .anyRequest().authenticated()
             ).formLogin(
                     form->form.loginPage("/login")
-                            .loginProcessingUrl("/loginUser")
-                            .defaultSuccessUrl("/admin", true)
+                           .loginProcessingUrl("/login")
+                           .defaultSuccessUrl("/admin", true)
                             .permitAll()
-            ).logout(
+           )
+            .logout(
                     logout->logout.permitAll()
             ).exceptionHandling(
                     configurer->configurer.accessDeniedPage("/login")
