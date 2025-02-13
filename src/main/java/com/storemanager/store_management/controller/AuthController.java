@@ -57,6 +57,7 @@ public class AuthController {
             return "redirect:/register";
         }
 
+
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(passwordEncoder.encode(password));
@@ -69,6 +70,7 @@ public class AuthController {
     }
 
     // Xử lý đăng nhập
+
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
@@ -76,14 +78,14 @@ public class AuthController {
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByUsername(username));
 
         if (optionalUser.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng.");
+            redirectAttributes.addFlashAttribute("error1", "Tên đăng nhập hoặc mật khẩu không đúng.");
             return "redirect:/login";
         }
 
         User user = optionalUser.get();
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            redirectAttributes.addFlashAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng.");
+            redirectAttributes.addFlashAttribute("error1", "Tên đăng nhập hoặc mật khẩu không đúng.");
             return "redirect:/login";
         }
 

@@ -24,7 +24,9 @@
 
     <div class="register-box-body">
         <p class="login-box-msg"><b>Đăng ký</b></p>
-
+        <div th:if="${error}" class="alert alert-danger text-center">
+            <p th:text="${error}"></p>
+        </div>
         <form th:action="@{/register}" method="post" th:object="${user}">
             <div class="form-group has-feedback">
                 <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập" required
