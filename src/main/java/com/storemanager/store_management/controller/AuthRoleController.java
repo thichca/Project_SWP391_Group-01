@@ -20,18 +20,17 @@ public class AuthRoleController {
     private AuthRoleService authRoleService;
 
     @GetMapping("/authRoles")
-    public String getUsers( Model model) {
-        String role = "ROLE_ADMIN";
+    public String getUsers(@RequestParam(value = "role", required = false) String role, Model model) {
         List<User> authRoles;
-        if (role != null) {
+        if (role != null && !role.isEmpty()) {  // Kiểm tra role hợp lệ
             authRoles = authRoleService.getUsersByRole(role);
         } else {
             authRoles = authRoleService.getAllUsers();
         }
         model.addAttribute("authRoles", authRoles);
         return "authRole";
-
     }
+
 
     @PostMapping("/updateRole")
     public String updateRole(@RequestParam("id") Long userId,

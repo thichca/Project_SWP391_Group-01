@@ -40,7 +40,6 @@ public class UserServiceIpml implements UserService {
         if(user==null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),rolesToAuthorities(user.getRoles()));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
