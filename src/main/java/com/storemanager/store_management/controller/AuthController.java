@@ -59,8 +59,9 @@ public class AuthController {
 
         User newUser = new User();
         newUser.setUsername(username);
-        newUser.setPassword(password);
+        newUser.setPassword(passwordEncoder.encode(password));
         newUser.setEmail(email);
+        newUser.setRole("ROLE_EMPLOYEE");
         userRepository.save(newUser);
 
         return "redirect:/login";

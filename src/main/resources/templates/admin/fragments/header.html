@@ -24,7 +24,7 @@
                         <img th:src="${user != null && user.avatar != null ? user.avatar : '/assets/images/pushImg/avatar_trang_1_cd729c335b.jpg'}"
                              th:style="'width: 25px; height: 25px; object-fit: cover; border-radius: 50%; border: 2px solid #fff;'"
                              alt="User Avatar">
-                        <span th:text="${user != null ? user.username : 'Guest'}"></span>
+                        <span th:text="${user != null ? user.username : 'Khách'}"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
@@ -32,8 +32,8 @@
                                   th:style="'width: 25px; height: 25px; object-fit: cover; border-radius: 50%; border: 2px solid #fff;'"
                                   alt="User Avatar">
                             <p>
-                            <p th:text="${user != null ? user.username : 'Guest'}"></p>
-                            <p th:text="${user.role == 'ROLE_ADMIN' ? 'Admin' : (user.role == 'ROLE_EMPLOYEE' ? 'Employee' : 'Owner')}"></p>
+                            <p th:text="${user != null ? user.username : 'Khách'}"></p>
+                            <p th:text="${user.role == 'ROLE_ADMIN' ? 'Admin' : (user.role == 'ROLE_EMPLOYEE' ? 'Nhân Viên' : 'Ông Chủ')}"></p>
                             </p>
                         </li>
                         <li class="user-footer">
