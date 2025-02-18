@@ -1,4 +1,4 @@
-<aside class="main-sidebar" th:fragment="sidebar">
+<aside class="main-sidebar" th:fragment="sidebar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
@@ -80,7 +80,7 @@
                 <ul class="treeview-menu">
                     <li><a href=""><i class="fa fa-database"></i> Cơ sở dữ liệu</a></li>
                     <li><a href=""><i class="fa fa-shield"></i> Cài đặt bảo mật</a></li>
-                    <li><a href="/authRoles"><i class="fa fa-tags"></i> Quản lý vai trò</a></li>
+                    <li><a sec:authorize="hasRole('ADMIN')" href="/admin/authRoles"><i class="fa fa-tags"></i> Quản lý vai trò</a></li>
                 </ul>
             </li>
 
