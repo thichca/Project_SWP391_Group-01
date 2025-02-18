@@ -37,37 +37,36 @@ public class AuthController {
 
     // Xử lý đăng ký người dùng
     @PostMapping("/register")
-    public String registerUser(@RequestParam String username,
-                               @RequestParam String password,
-                               @RequestParam String confirmPassword,
-                               @RequestParam String email,
-                               RedirectAttributes redirectAttributes) {
+    public String register(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String confirmPassword,
+            @RequestParam String email,
+            RedirectAttributes redirectAttributes) {
+
         if (!password.equals(confirmPassword)) {
-            redirectAttributes.addFlashAttribute("error", "Mật khẩu không khớp.");
-            return "redirect:/register";
+            redirectAttributes.addFlashAttribute(Constants.ERROR_MESSAGE, Constants.ERROR_PASSWORD_MISMATCH);
+            return Constants.REDIRECT_REGISTER;
         }
-
         if (userRepository.findByUsername(username) != null) {
-            redirectAttributes.addFlashAttribute("error", "Tên đăng nhập đã tồn tại.");
-            return "redirect:/register";
+            redirectAttributes.addFlashAttribute(Constants.ERROR_MESSAGE, Constants.ERROR_USERNAME_EXISTS);
+            return Constants.REDIRECT_REGISTER;
         }
-
         if (userRepository.findByEmail(email) != null) {
-            redirectAttributes.addFlashAttribute("error", "Email đã được sử dụng.");
-            return "redirect:/register";
+            redirectAttributes.addFlashAttribute(Constants.ERROR_MESSAGE, Constants.ERROR_EMAIL_EXISTS);
+            return Constants.REDIRECT_REGISTER;
         }
-
 
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setEmail(email);
         newUser.setRole("ROLE_EMPLOYEE");
-
         userRepository.save(newUser);
-        redirectAttributes.addFlashAttribute("success", "Đăng ký thành công! Vui lòng đăng nhập.");
+
         return "redirect:/login";
     }
+
 
     // Xử lý đăng nhập
 
@@ -92,4 +91,13 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("success", "Đăng nhập thành công!");
         return "redirect:/admin";
     }
+
+    public class Constants {
+        public static final String ERROR_MESSAGE = "error";
+        public static final String REDIRECT_REGISTER = "redirect:/register";
+        public static final String ERROR_PASSWORD_MISMATCH = "Mật khẩu không khớp.";
+        public static final String ERROR_USERNAME_EXISTS = "Tên đăng nhập đã tồn tại.";
+        public static final String ERROR_EMAIL_EXISTS = "Email đã được sử dụng.";
+    }
+
 }

@@ -38,12 +38,12 @@ public class DebtRecordService {
     @Transactional
     public void saveDebtRecord(DebtRecord debtRecord) {
         Customer customer = customerRepository.findById(debtRecord.getCustomer().getId())
-                .orElseThrow(() -> new RuntimeException("Khách hàng không tồn tại"));
+                .orElseThrow(() -> new CustomerNotFoundException("Khách hàng không tồn tại"));
 
         if ("GHI_NO".equals(debtRecord.getType())) {
             // Ghi nợ (tăng công nợ)
             if (customer.getDebtBalance() + debtRecord.getAmount() > CREDIT_LIMIT) {
-                throw new RuntimeException("Công nợ vượt hạn mức cho phép!");
+                throw new CreditLimitExceededException("Công nợ vượt hạn mức cho phép!");
             }
             customer.setDebtBalance(customer.getDebtBalance() + debtRecord.getAmount());
         } else if ("TRA_NO".equals(debtRecord.getType())) {
@@ -71,4 +71,17 @@ public class DebtRecordService {
         customerRepository.save(customer);
         debtRecordRepository.deleteById(id);
     }
+
+    public class CustomerNotFoundException extends RuntimeException {
+        public CustomerNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public class CreditLimitExceededException extends RuntimeException {
+        public CreditLimitExceededException(String message) {
+            super(message);
+        }
+    }
+
 }

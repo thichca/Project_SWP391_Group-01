@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PasswordResetController {
 
-    private final PasswordResetService PasswordResetService;
+    private final PasswordResetService passwordResetService;
 
     @Autowired
     public PasswordResetController(PasswordResetService PasswordResetService) {
-        this.PasswordResetService = PasswordResetService;
+        this.passwordResetService = PasswordResetService;
     }
 
     @GetMapping("/forget-password")
@@ -33,7 +33,7 @@ public class PasswordResetController {
             return "forgetPassword";
         }
 
-        boolean exists = PasswordResetService.checkIdExists(email);
+        boolean exists = passwordResetService.checkIdExists(email);
 
         if (exists) {
             model.addAttribute("email", email);
@@ -56,7 +56,7 @@ public class PasswordResetController {
             return "resetPassword";
         }
 
-        boolean isUpdated = PasswordResetService.updatePassword(email, newPassword);
+        boolean isUpdated = passwordResetService.updatePassword(email, newPassword);
 
         if (isUpdated) {
             model.addAttribute("message", "Mật khẩu đã được cập nhật thành công.");
