@@ -562,10 +562,11 @@ a:focus {
     line-height: 1;
     position: absolute;
     left: 55px;
-    margin-top: 4%;
+    margin: 3% 0 0 -6%;
+    font-size: 14px;
 }
 
-.user-panel > .info > p {
+.user-panel > .info > span {
     font-weight: 600;
     margin-bottom: 9px;
 }
