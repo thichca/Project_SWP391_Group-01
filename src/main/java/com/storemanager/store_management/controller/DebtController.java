@@ -57,25 +57,20 @@ public class DebtController {
                           RedirectAttributes redirectAttributes) {
         // Lấy thông tin User từ Security Context
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
             User user = userServiceIpml.findByUsername(username);
-
             // Gán User cho DebtRecord
             debtRecord.setUser(user);
         } else {
             redirectAttributes.addFlashAttribute("error", "Không thể xác định người dùng!");
             return "redirect:/debts";
         }
-        Customer customer = customerService.getCustomerById(debtRecord.getCustomer().getId());
-        if (customer.getDebtBalance() + debtRecord.getAmount() > CREDIT_LIMIT) {
-            redirectAttributes.addFlashAttribute("error", "Công nợ vượt hạn mức! Vui lòng kiểm tra lại.");
-            return "redirect:/debts";
-        }
-        debtRecordService.saveDebtRecord(debtRecord);
-        redirectAttributes.addFlashAttribute("message", "Ghi nhận công nợ thành công!");
-        return "redirect:/debts";
+
+        // Tiếp tục xử lý logic thêm DebtRecord (nếu có)
+        return "redirect:/debts"; // hoặc trang đích sau khi thêm thành công
     }
+
 
     @GetMapping("/customer/{customerId}")
     public String viewCustomerDebts(@PathVariable Long customerId, Model model) {
