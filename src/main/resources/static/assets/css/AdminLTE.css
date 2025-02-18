@@ -562,6 +562,7 @@ a:focus {
     line-height: 1;
     position: absolute;
     left: 55px;
+    margin-top: 4%;
 }
 
 .user-panel > .info > p {
