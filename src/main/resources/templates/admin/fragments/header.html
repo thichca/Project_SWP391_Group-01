@@ -21,17 +21,19 @@
                 <!-- Tài khoản người dùng -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img th:src="${user != null && user.avatar != null ? user.avatar : '/images/avatar.png'}"
+                        <img th:src="${user != null && user.avatar != null ? user.avatar : '/assets/images/pushImg/avatar_trang_1_cd729c335b.jpg'}"
+                             th:style="'width: 25px; height: 25px; object-fit: cover; border-radius: 50%; border: 2px solid #fff;'"
                              alt="User Avatar">
                         <span th:text="${user != null ? user.username : 'Guest'}"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img th:src="${user != null && user.avatar != null ? user.avatar : '/images/avatar.png'}"
-                                 alt="User Avatar">
+                            <img  th:src="${user != null && user.avatar != null ? user.avatar : '/assets/images/pushImg/avatar_trang_1_cd729c335b.jpg'}"
+                                  th:style="'width: 25px; height: 25px; object-fit: cover; border-radius: 50%; border: 2px solid #fff;'"
+                                  alt="User Avatar">
                             <p>
-                                <span th:text="${user != null ? user.username : 'Guest'}"></span>
-                                <span th:text="${user.role}"></span>
+                            <p th:text="${user != null ? user.username : 'Guest'}"></p>
+                            <p th:text="${user.role == 'ROLE_ADMIN' ? 'Admin' : (user.role == 'ROLE_EMPLOYEE' ? 'Employee' : 'Owner')}"></p>
                             </p>
                         </li>
                         <li class="user-footer">
