@@ -70,21 +70,21 @@
                 </a>
             </li>
 
-            <li class="treeview">
+            <li sec:authorize="hasRole('ADMIN')" class="treeview">
                 <a href="#">
                     <i class="fa fa-cogs"></i> <span>Quản lý hệ thống</span>
                     <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-    </span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href=""><i class="fa fa-database"></i> Cơ sở dữ liệu</a></li>
                     <li><a href=""><i class="fa fa-shield"></i> Cài đặt bảo mật</a></li>
-                    <li><a sec:authorize="hasRole('ADMIN')" href="/admin/authRoles"><i class="fa fa-tags"></i> Quản lý vai trò</a></li>
+                    <li><a href="/admin/authRoles"><i class="fa fa-tags"></i> Quản lý vai trò</a></li>
                 </ul>
             </li>
 
-            <li>
+            <li sec:authorize="hasRole('ADMIN')">
                 <a href="#">
                     <i class="fa fa-cloud"></i> <span>Cloud</span>
                 </a>
