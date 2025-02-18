@@ -34,6 +34,8 @@
                             .requestMatchers("/register/**").permitAll()
                             .requestMatchers("/forget-password/**").permitAll()
                             .requestMatchers("/reset-password/**").permitAll()
+                            .requestMatchers("/admin").permitAll()
+                            .requestMatchers("/admin/**").hasRole("ADMIN")
 
                             .anyRequest().authenticated()
             ).formLogin(

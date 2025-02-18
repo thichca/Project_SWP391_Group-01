@@ -31,37 +31,57 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="authRole : ${authRoles}">
+                <tr th:each="authRole : ${usersPage.content}">
                     <td th:text="${authRole.id}"></td>
                     <td th:text="${authRole.username}"></td>
                     <td th:text="${authRole.email}"></td>
                     <td>
                         <form th:action="@{/updateRole}" method="post">
                             <input type="hidden" name="id" th:value="${authRole.id}">
-                            <div class="input-group">
+                            <div class="input-group" style="display: flex; align-items: center; gap: 10px;">
                                 <select class="form-select" name="role">
                                     <option th:value="${authRole.role}" th:text="${authRole.role}" selected></option>
                                     <option th:value="${authRole.role == 'ROLE_EMPLOYEE' ? 'ROLE_OWNER' : 'ROLE_EMPLOYEE'}"
                                             th:text="${authRole.role == 'ROLE_EMPLOYEE' ? 'ROLE_OWNER' : 'ROLE_EMPLOYEE'}">
                                     </option>
                                 </select>
-                                <button type="submit" class="btn btn-primary">Set</button>
+                                <button th:style="'margin-top: -5px;'" type="submit" class="btn btn-primary">Set
+                                </button>
                             </div>
                         </form>
                     </td>
-
                     <td th:text="${authRole.delete}"></td>
                 </tr>
                 </tbody>
             </table>
+
+            <!-- Phân trang -->
+            <div class="pagination">
+                <!-- Nút Previous -->
+                <!--                <span th:if="${currentPage > 0}">-->
+                <!--        <a th:href="@{/authRoles(page=${currentPage - 1})}">Previous</a>-->
+                </span>
+
+                <!-- Hiển thị danh sách số trang -->
+                <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a th:href="@{/authRoles(page=${i})}"
+                       th:text="${i + 1}"
+                       th:classappend="${i == currentPage} ? 'active' : ''">
+                    </a>
+                </span>
+
+                <!-- Nút Next -->
+                <!--                <span th:if="${currentPage < totalPages - 1}">-->
+                <!--        <a th:href="@{/authRoles(page=${currentPage + 1})}">Next</a>-->
+                </span>
+            </div>
+
         </div>
     </div>
     <!-- /.content-wrapper -->
     <footer th:replace="admin/fragments/footer :: footer"></footer>
-
+    <!-- ./wrapper -->
 </div>
-<!-- ./wrapper -->
-
 <!-- jQuery 3 -->
 <div th:replace="admin/fragments/script :: script"></div>
 </body>
