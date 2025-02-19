@@ -16,13 +16,18 @@ public class AuthRoleService {
     @Autowired
     private AuthRoleRepository authRoleRepository;
 
-//    public List<User> getUsersByRole(String role) {
-//        return authRoleRepository.findByRole(role);
-//    }
+    public List<User> getUsersByRole(String role) {
+        return authRoleRepository.findByRole(role);
+    }
 
     public Page<User> getUsersByRolePages(String role, Pageable pageable) {
         return authRoleRepository.findByRole(role, pageable);
     }
+
+    public Page<User> searchUsersByName(String name, String role, Pageable pageable) {
+        return authRoleRepository.searchByName(name, role, pageable);
+    }
+
 
     public List<User> getAllUsers() {
         return authRoleRepository.findAll();

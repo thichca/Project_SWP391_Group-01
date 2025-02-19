@@ -20,6 +20,15 @@
 
         <div class="container">
             <h2>Danh sách tài khoản</h2>
+
+            <form action="/admin/authRoles" method="get" class="d-flex align-items-center">
+                <input type="text" name="keyword" class="form-control form-control-sm me-2"
+                       placeholder="Tìm kiếm theo tên"
+                       th:value="${keyword != null and keyword != '' ? keyword : null}"
+                       style="width: 200px;">
+                <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+            </form>
+
             <table>
                 <thead>
                 <tr>
@@ -56,25 +65,28 @@
             </table>
 
             <!-- Phân trang -->
-            <div class="pagination">
-                <!-- Nút Previous -->
-                <!--                <span th:if="${currentPage > 0}">-->
-                <!--        <a th:href="@{/authRoles(page=${currentPage - 1})}">Previous</a>-->
-                </span>
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <!-- Nút Previous -->
+                    <li class="page-item" th:if="${currentPage > 0}">
+                        <a class="page-link" th:href="@{/admin/authRoles(page=${currentPage - 1})}">Previous</a>
+                    </li>
 
-                <!-- Hiển thị danh sách số trang -->
-                <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-                    <a th:href="@{/authRoles(page=${i})}"
-                       th:text="${i + 1}"
-                       th:classappend="${i == currentPage} ? 'active' : ''">
-                    </a>
-                </span>
+                    <!-- Hiển thị danh sách số trang -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                        <a class="page-link" th:href="@{/admin/authRoles(page=${i})}"
+                           th:text="${i + 1}"
+                           th:classappend="${i == currentPage} ? 'active' : ''">
+                        </a>
+                    </li>
 
-                <!-- Nút Next -->
-                <!--                <span th:if="${currentPage < totalPages - 1}">-->
-                <!--        <a th:href="@{/authRoles(page=${currentPage + 1})}">Next</a>-->
-                </span>
+                    <!-- Nút Next -->
+                    <li class="page-item" th:if="${currentPage < totalPages - 1}">
+                        <a class="page-link" th:href="@{/admin/authRoles(page=${currentPage + 1})}">Next</a>
+                    </li>
+                </ul>
             </div>
+
         </div>
     </div>
     <!-- /.content-wrapper -->

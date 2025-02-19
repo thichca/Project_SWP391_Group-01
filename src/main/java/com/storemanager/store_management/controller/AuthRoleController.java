@@ -23,43 +23,10 @@ public class AuthRoleController {
     @Autowired
     private AuthRoleService authRoleService;
 
-    //    @GetMapping("/authRoles")
-//    public String getUsers( Model model) {
-//        String role = "ROLE_ADMIN";
-//        List<User> authRoles;
-//        if (role != null) {
-//            authRoles = authRoleService.getUsersByRole(role);
-//        } else {
-//            authRoles = authRoleService.getAllUsers();
-//        }
-//        model.addAttribute("authRoles", authRoles);
-//        return "authRole";
-//
-//    }
-    @GetMapping("/admin/authRoles")
-    public String listUsers(@RequestParam(defaultValue = "0") int page, Model model) {
-        String role = "ROLE_ADMIN";
-        Pageable pageable = PageRequest.of(page, 2, Sort.by("id").ascending());  // Mỗi trang sẽ hiển thị 10 người dùng
-        Page<User> usersPage = authRoleService.getUsersByRolePages(role, pageable);
-
-        model.addAttribute("usersPage", usersPage);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", usersPage.getTotalPages());
-        return "authRole";
-    }
-//
-//    @GetMapping("/authRoles")
+//    @GetMapping("/admin/authRoles")
 //    public String listUsers(@RequestParam(defaultValue = "0") int page, Model model) {
 //        String role = "ROLE_ADMIN";
-//        List<User> authRoles;
-//        if (role != null) {
-//            authRoles = authRoleService.getUsersByRole(role);
-//        } else {
-//            authRoles = authRoleService.getAllUsers();
-//        }
-//        model.addAttribute("authRoles", authRoles);
-//        return "authRole";
-//        Pageable pageable = PageRequest.of(page, 10, Sort.by("id").ascending());  // Mỗi trang sẽ hiển thị 10 người dùng
+//        Pageable pageable = PageRequest.of(page, 1, Sort.by("id").ascending());
 //        Page<User> usersPage = authRoleService.getUsersByRolePages(role, pageable);
 //
 //        model.addAttribute("usersPage", usersPage);
@@ -67,6 +34,28 @@ public class AuthRoleController {
 //        model.addAttribute("totalPages", usersPage.getTotalPages());
 //        return "authRole";
 //    }
+
+    @GetMapping("/admin/authRoles")
+    public String listUsers(@RequestParam(defaultValue = "0") int page,
+                            @RequestParam(required = false) String keyword,
+                            Model model) {
+        String role = "ROLE_ADMIN";
+        Pageable pageable = PageRequest.of(page, 1, Sort.by("id").ascending());
+
+        Page<User> usersPage;
+        if (keyword != null && !keyword.isEmpty()) {
+            usersPage = authRoleService.searchUsersByName(keyword, role, pageable);
+        } else {
+            usersPage = authRoleService.getUsersByRolePages(role, pageable);
+        }
+
+        model.addAttribute("usersPage", usersPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", usersPage.getTotalPages());
+        model.addAttribute("keyword", keyword);
+        return "authRole";
+    }
+
 
     @PostMapping("/admin/updateRole")
     public String updateRole(@RequestParam("id") Long userId,
