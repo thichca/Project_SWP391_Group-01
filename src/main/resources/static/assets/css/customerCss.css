@@ -1,7 +1,29 @@
 /* ============================
-   1. Giới hạn phạm vi cho trang khách hàng
+   1. Breadcrumb
    ============================ */
-.customer-page {
+.box-tools .breadcrumb {
+    margin-bottom: 0;
+    padding: 5px;
+    background: none;
+}
+
+.box-tools .breadcrumb li {
+    margin-right: 15px;
+    float: left;
+}
+
+.box-tools .breadcrumb li a {
+    color: #333;
+}
+
+.content-header > .breadcrumb {
+    padding: 0 7px;
+}
+
+/* ============================
+   2. Tùy chỉnh Nội dung Chính
+   ============================ */
+.container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
@@ -10,95 +32,49 @@
     border-radius: 5px;
 }
 
-/* ============================
-   2. Tiêu đề và bố cục chung
-   ============================ */
-.customer-page h2 {
+h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
 }
 
 /* ============================
-   3. Thanh công cụ (Toolbar)
+   3. Tìm kiếm
    ============================ */
-.customer-page .toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.customer-page .search-container,
-.customer-page .filter-container {
-    display: flex;
-    gap: 10px;
-}
-
-.customer-page input[type="text"],
-.customer-page select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 40px;
-}
-
-.customer-page button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.customer-page button:hover {
-    background-color: #0056b3;
-}
 
 /* ============================
    4. Bảng danh sách khách hàng
    ============================ */
-.customer-page table {
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.customer-page table,
-.customer-page th,
-.customer-page td {
+table, th, td {
     border: 1px solid #ddd;
 }
 
-.customer-page th,
-.customer-page td {
+th, td {
     padding: 10px;
     text-align: left;
 }
 
-.customer-page th {
+th {
     background: #f4f4f4;
     font-weight: bold;
 }
 
-.customer-page tr:nth-child(even) {
+tr:nth-child(even) {
     background: #f9f9f9;
 }
 
-.customer-page .action-links {
+.action-links {
     display: flex;
     gap: 10px;
 }
 
-.customer-page .action-links button,
-.customer-page .action-links a {
+.action-links button,
+.action-links a {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -106,56 +82,288 @@
     border-radius: 3px;
 }
 
-.customer-page .edit {
+.edit {
     background: #ffc107;
     color: #fff;
 }
 
-.customer-page .delete {
+.delete {
     background: #dc3545;
     color: #fff;
 }
 
-.customer-page .edit:hover {
+.edit:hover {
     background: #e0a800;
 }
 
-.customer-page .delete:hover {
+.delete:hover {
     background: #c82333;
 }
 
 /* ============================
    5. Form Thêm & Sửa khách hàng
    ============================ */
-.customer-page #addCustomerForm,
-.customer-page #editCustomerForm {
-    display: none;
-    width: 400px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
+
+
+/* ============================
+   6. Nút Thêm khách hàng
+   ============================ */
+/*.add-button {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.btn-add {*/
+/*    background: #17a2b8;*/
+/*    color: #fff;*/
+/*    padding: 10px 15px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.btn-add:hover {*/
+/*    background: #138496;*/
+/*}*/
+
+/* ============================
+   7. Responsive
+   ============================ */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-container input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .action-links {
+        flex-direction: column;
+    }
+}
+/* ============================
+   8. Phân trang
+   ============================ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
 }
 
-.customer-page h3 {
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination .prev, .pagination .next {
+    padding: 8px 12px;
+    background-color: #f1f1f1;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .prev:hover, .pagination .next:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Khi không thể click (disabled) */
+.pagination .disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+}
+
+/* Điều chỉnh phân trang cho các màn hình nhỏ */
+@media (max-width: 768px) {
+    .pagination a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Hoặc space-around / space-evenly tùy thích */
+    gap: 15px; /* Khoảng cách giữa các phần tử */
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container form,
+.filter-container form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type="text"], select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.btn-add {
+    background-color: #28a745;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+.toolbar {
+    display: flex;
+    justify-content: center; /* Căn giữa các phần tử */
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa các phần tử */
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.toolbar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 45px; /* Đảm bảo chiều cao bằng nhau */
+}
+
+/* Làm rộng thanh chọn địa chỉ */
+select {
+    width: 300px; /* Tăng độ rộng */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 45px;
+}
+
+/* Thu nhỏ nút lọc */
+button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 45px; /* Đảm bảo chiều cao bằng nhau */
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Nút lọc nhỏ hơn */
+.filter-container button {
+    width: 120px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.btn-add {
+    background-color: #28a745;
+    padding: 10px 20px;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+/*!* Định dạng chung cho form *!*/
+/*#addCustomerForm, #editCustomerForm {*/
+/*    display: none;*/
+/*    width: 400px;*/
+/*    background: #fff;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    z-index: 1000;*/
+/*}*/
+
+/* Tiêu đề của form */
+#addCustomerForm h3, #editCustomerForm h3 {
     text-align: center;
     color: #333;
     margin-bottom: 15px;
 }
 
-.customer-page label {
+/* Định dạng nhãn */
+#addCustomerForm label, #editCustomerForm label {
     display: block;
     font-weight: bold;
     margin: 10px 0 5px;
     color: #555;
 }
 
-.customer-page input {
+/* Định dạng ô nhập liệu */
+#addCustomerForm input, #editCustomerForm input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -163,7 +371,8 @@
     font-size: 14px;
 }
 
-.customer-page .btn {
+/* Nút bấm */
+.btn {
     display: inline-block;
     width: 48%;
     padding: 10px;
@@ -175,90 +384,86 @@
     transition: 0.3s;
 }
 
-.customer-page .btn:hover {
+.btn:hover {
     opacity: 0.8;
 }
 
-.customer-page .btn {
+/* Nút xác nhận */
+.btn {
     background-color: #28a745;
     color: white;
 }
 
-.customer-page .btn.cancel {
+/* Nút hủy */
+.btn.cancel {
     background-color: #dc3545;
     color: white;
 }
+.alert {
 
-/* ============================
-   6. Phân trang (Pagination)
-   ============================ */
-.customer-page .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.customer-page .pagination a {
-    padding: 8px 12px;
-    margin: 0 5px;
-    text-decoration: none;
-    color: #007bff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.customer-page .pagination a:hover {
-    background-color: #007bff;
+    background-color: #28a745; /* Màu xanh lá */
     color: white;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 5px; /* Bo tròn góc */
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    width: fit-content;
+    margin: 20px auto; /* Canh giữa */
+    display: block;
+
+
 }
 
-.customer-page .pagination a.active {
-    background-color: #007bff;
-    color: white;
-    border: 1px solid #007bff;
+/* Hiệu ứng màu xanh lá cây */
+.alert-success {
+    background-color: green;
+    border-color: #4CAF50; /* Xanh lá cây đậm hơn */
+    color: #155724;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5); /* Tăng hiệu ứng xanh lá */
 }
 
-.customer-page .pagination .disabled {
-    color: #ccc;
-    cursor: not-allowed;
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
+.alert-error {
+    background-color: #f8d7da;
+    border-color: #f44336;
+    color: #721c24;
 }
 
-/* ============================
-   7. Responsive
-   ============================ */
-@media (max-width: 768px) {
-    .customer-page .toolbar {
-        flex-direction: column;
-        align-items: center;
-    }
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ff9800;
+    color: #856404;
+}
 
-    .customer-page .search-container,
-    .customer-page .filter-container {
-        flex-direction: column;
-        align-items: center;
-    }
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #2196F3;
+    color: #0c5460;
+}
 
-    .customer-page input[type="text"],
-    .customer-page select {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+/* Nút đóng thông báo */
+.alert .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: inherit;
+}
 
-    .customer-page table {
-        font-size: 14px;
+/* Hiệu ứng ẩn mờ dần */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
     }
-
-    .customer-page .action-links {
-        flex-direction: column;
-    }
-
-    .customer-page .pagination a {
-        padding: 6px 10px;
-        font-size: 12px;
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 }
+
+

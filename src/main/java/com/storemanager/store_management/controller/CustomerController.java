@@ -59,9 +59,12 @@ public class CustomerController {
     // Xử lý khi thêm khách hàng
     @PostMapping("/add")
     public String addCustomer(@ModelAttribute("customer") Customer customer, RedirectAttributes redirectAttributes) {
-        customerService.saveCustomer(customer);
+        if (!customerService.saveCustomer(customer,true)) {
+            redirectAttributes.addFlashAttribute("message", "Số điện thoại đã tồn tại, vui lòng kiểm tra lại!");
+            return "redirect:/customers"; // Quay lại trang danh sách khách hàng với thông báo lỗi
+        }
         redirectAttributes.addFlashAttribute("message", "Thêm khách hàng thành công!");
-        return "redirect:/customers"; // Reload lại trang danh sách khách hàng
+        return "redirect:/customers";
     }
 
     // Xử lý khi xóa khách hàng
@@ -80,6 +83,7 @@ public class CustomerController {
             @RequestParam("phone") String phone,
             @RequestParam("address") String address,
             @RequestParam("debtBalance") Double debtBalance,
+            @RequestParam("note") String note,
             RedirectAttributes redirectAttributes) {
 
         Customer customer = customerService.getCustomerById(id);
@@ -88,7 +92,8 @@ public class CustomerController {
             customer.setPhone(phone);
             customer.setAddress(address);
             customer.setDebtBalance(debtBalance);
-            customerService.saveCustomer(customer);
+            customer.setNote(note);
+            customerService.saveCustomer(customer,false);
             redirectAttributes.addFlashAttribute("message", "Cập nhật khách hàng thành công!");
         } else {
             redirectAttributes.addFlashAttribute("error", "Không tìm thấy khách hàng!");

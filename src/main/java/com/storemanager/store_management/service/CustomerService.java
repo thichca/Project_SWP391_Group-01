@@ -35,9 +35,20 @@ public class CustomerService {
         return customerRepository.findDistinctAddresses();
     }
 
-    public void saveCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public boolean isPhoneExists(String phone) {
+        return customerRepository.existsByPhone(phone);
     }
+
+    public boolean saveCustomer(Customer customer, boolean isNew) {
+        // Nếu là thêm mới, kiểm tra xem số điện thoại đã tồn tại chưa
+        if (isNew && isPhoneExists(customer.getPhone())) {
+            return false; // Không lưu nếu số điện thoại đã tồn tại
+        }
+
+        customerRepository.save(customer);
+        return true;
+    }
+
 
     public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);

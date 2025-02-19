@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/fragments/head :: head"></head>
-
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -19,16 +18,17 @@
     <div class="content-wrapper">
 
 
-        <div class="customer-page">
+        <div class="container">
             <h2>Danh sách khách hàng</h2>
-
             <!-- Hiển thị thông báo nếu có -->
-            <div th:if="${message}" class="alert">
-                <p th:text="${message}"></p>
+            <div th:if="${message}" th:class="'alert ' + ${messageType}">
+                <span th:text="${message}"></span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
             </div>
+
             <div class="toolbar">
 
-            <!-- Thanh tìm kiếm -->
+                <!-- Thanh tìm kiếm -->
                 <div class="search-container">
                     <form th:action="@{/customers}" method="get">
                         <input type="text" name="keyword" placeholder="Nhập tên hoặc số điện thoại..." th:value="${keyword}">
@@ -69,6 +69,8 @@
 
                     <label for="debtBalance">Công nợ:</label>
                     <input type="number" id="debtBalance" th:field="*{debtBalance}" step="0.01" required min="0">
+                    <label for="address">Ghi chú:</label>
+                    <input type="text" id="note" th:field="*{note}" required>
 
                     <button type="submit" class="btn">Thêm khách hàng</button>
                     <button type="button" class="btn cancel" onclick="toggleFormAdd()">Hủy</button>
@@ -79,24 +81,26 @@
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
+
                     <th>Tên khách hàng</th>
                     <th>Số điện thoại</th>
                     <th>Địa chỉ</th>
                     <th>Công nợ</th>
+                    <th>Ghi chú</th>
                     <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="customer : ${customers}">
-                    <td th:text="${customer.id}"></td>
+
                     <td th:text="${customer.name}"></td>
                     <td th:text="${customer.phone}"></td>
                     <td th:text="${customer.address}"></td>
                     <td th:text="${customer.debtBalance}"></td>
+                    <td th:text="${customer.note}"></td>
                     <td class="action-links">
                         <button class="edit"
-                                th:attr="onclick=|toggleFormEdit('${customer.id}', '${customer.name}', '${customer.phone}', '${customer.address}', '${customer.debtBalance}')|">
+                                th:attr="onclick=|toggleFormEdit('${customer.id}', '${customer.name}', '${customer.phone}', '${customer.address}', '${customer.debtBalance}' , '${customer.note}')|">
                             Sửa
                         </button>
                         <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="delete"
@@ -136,6 +140,9 @@
                     <label for="editDebtBalance">Công nợ:</label>
                     <input type="number" id="editDebtBalance" name="debtBalance" step="0.01" required>
 
+                    <label for="editNote">Ghi chú:</label>
+                    <input type="text" id="editNote" name="note" required>
+
                     <button type="submit" class="btn">Lưu thay đổi</button>
                     <button type="button" class="btn cancel" onclick="closeEditForm()">Hủy</button>
                 </form>
@@ -147,6 +154,18 @@
     <footer th:replace="admin/fragments/footer :: footer"></footer>
 
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            let alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.style.display = 'none', 500); // Ẩn sau khi hiệu ứng mờ dần kết thúc
+            });
+        }, 3000); // 3 giây
+    });
+</script>
+
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->

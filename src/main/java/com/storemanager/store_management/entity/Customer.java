@@ -29,6 +29,9 @@ public class Customer {
     @Column(name = "debt_balance", nullable = false)
     private Double debtBalance;
 
+    @Column(length = 255)  // Thêm cột note
+    private String note;
+
     @Column(name = "created_at", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

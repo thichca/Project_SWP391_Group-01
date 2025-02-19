@@ -11,12 +11,14 @@ import java.util.List;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    // Tìm kiếm khách hàng theo tên hoặc số điện thoại
     Page<Customer> findByNameContainingIgnoreCaseOrPhoneContaining(String name, String phone, Pageable pageable);
 
-    // Lọc khách hàng theo địa chỉ
     Page<Customer> findByAddressContainingIgnoreCase(String address, Pageable pageable);
 
-    // Truy vấn tùy chỉnh lấy tất cả các địa chỉ khác nhau (distinct) từ cơ sở dữ liệu
     @Query("SELECT DISTINCT c.address FROM Customer c WHERE c.address IS NOT NULL")
-    List<String> findDistinctAddresses();}
+    List<String> findDistinctAddresses();
+    // Kiểm tra khách hàng có số điện thoại đã tồn tại chưa
+    boolean existsByPhone(String phone);
+
+
+}
